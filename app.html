@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guess the Decade – Grant's App</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;600;700&display=swap');
+
+    :root {
+      --black: #121212;
+      --dark: #181818;
+      --card: #282828;
+      --green: #1db954;
+      --green-light: #1ed760;
+      --white: #ffffff;
+      --muted: #b3b3b3;
+      --red: #e74c3c;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      background: #000;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    header .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: var(--green);
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    header a.back {
+      color: var(--muted);
+      font-size: 0.9rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    header a.back:hover { color: var(--white); }
+
+    main {
+      width: 100%;
+      max-width: 640px;
+      padding: 2.5rem 1.5rem;
+      flex: 1;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 3px;
+      text-align: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .tagline {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Scoreboard */
+    .scoreboard {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .score-box {
+      text-align: center;
+      background: var(--card);
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+    }
+
+    .score-box .num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: var(--green);
+    }
+
+    .score-box .label {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* Song card */
+    .song-card {
+      background: var(--card);
+      border-radius: 14px;
+      padding: 2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .song-card .track-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .song-card .artist-name {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      margin-top: 0.75rem;
+    }
+
+    /* Decade buttons */
+    .decades {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .decade-btn {
+      background: var(--dark);
+      border: 2px solid rgba(255,255,255,0.1);
+      color: var(--white);
+      border-radius: 10px;
+      padding: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .decade-btn:hover:not(:disabled) {
+      background: #3a3a3a;
+      border-color: var(--green);
+      transform: scale(1.02);
+    }
+
+    .decade-btn.correct {
+      background: rgba(29,185,84,0.25);
+      border-color: var(--green);
+      color: var(--green-light);
+    }
+
+    .decade-btn.wrong {
+      background: rgba(231,76,60,0.2);
+      border-color: var(--red);
+      color: var(--red);
+    }
+
+    .decade-btn:disabled { cursor: default; }
+
+    /* Feedback */
+    #feedback {
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: 600;
+      min-height: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    #feedback.correct { color: var(--green); }
+    #feedback.wrong { color: var(--red); }
+
+    /* Next button */
+    #next-btn {
+      display: block;
+      width: 100%;
+      background: var(--green);
+      color: #000;
+      border: none;
+      padding: 0.9rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: background 0.2s, transform 0.15s;
+      font-family: 'DM Sans', sans-serif;
+      display: none;
+    }
+
+    #next-btn:hover {
+      background: var(--green-light);
+      transform: scale(1.02);
+    }
+
+    /* Game over */
+    #game-over {
+      display: none;
+      text-align: center;
+      background: var(--card);
+      border-radius: 14px;
+      padding: 2.5rem;
+    }
+
+    #game-over h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.5rem;
+    }
+
+    #game-over .final-score {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--green);
+      margin: 0.75rem 0;
+    }
+
+    #game-over p { color: var(--muted); margin-bottom: 1.5rem; }
+
+    #play-again {
+      background: var(--green);
+      color: #000;
+      border: none;
+      padding: 0.85rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.2s;
+    }
+
+    #play-again:hover { background: var(--green-light); }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: rgba(255,255,255,0.25);
+      font-size: 0.8rem;
+    }
+
+    footer a { color: var(--green); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="scratch.html" class="logo">🎵 GRANT'S PICKS</a>
+    <a href="scratch.html" class="back">← Back</a>
+  </header>
+
+  <main>
+    <h1>GUESS THE DECADE</h1>
+    <p class="tagline">Can you match the song to its era?</p>
+
+    <div class="scoreboard">
+      <div class="score-box">
+        <div class="num" id="score-correct">0</div>
+        <div class="label">CORRECT</div>
+      </div>
+      <div class="score-box">
+        <div class="num" id="score-q">1</div>
+        <div class="label">QUESTION</div>
+      </div>
+      <div class="score-box">
+        <div class="num" id="score-total">10</div>
+        <div class="label">TOTAL</div>
+      </div>
+    </div>
+
+    <div id="game-area">
+      <div class="song-card">
+        <div class="track-name" id="track-name">Loading...</div>
+        <div class="artist-name" id="artist-name"></div>
+        <div class="note">What decade was this released?</div>
+      </div>
+
+      <div class="decades" id="decade-buttons"></div>
+
+      <div id="feedback"></div>
+      <button id="next-btn" onclick="nextQuestion()">NEXT SONG →</button>
+    </div>
+
+    <div id="game-over">
+      <h2>GAME OVER</h2>
+      <p>Your final score:</p>
+      <div class="final-score" id="final-score">0 / 10</div>
+      <p id="grade-msg">Nice try!</p>
+      <button id="play-again" onclick="startGame()">PLAY AGAIN</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Made by Grant Chamberlain &nbsp;·&nbsp; <a href="scratch.html">← Scratch Page</a></p>
+  </footer>
+
+  <script>
+    const songs = [
+      { track: "Africa", artist: "Toto", decade: "1980s" },
+      { track: "Synchronicity II", artist: "The Police", decade: "1980s" },
+      { track: "Dust in the Wind", artist: "Kansas", decade: "1970s" },
+      { track: "The Stranger", artist: "Billy Joel", decade: "1970s" },
+      { track: "Bohemian Rhapsody", artist: "Queen", decade: "1970s" },
+      { track: "Hotel California", artist: "Eagles", decade: "1970s" },
+      { track: "Sweet Child O' Mine", artist: "Guns N' Roses", decade: "1980s" },
+      { track: "Smells Like Teen Spirit", artist: "Nirvana", decade: "1990s" },
+      { track: "Wonderwall", artist: "Oasis", decade: "1990s" },
+      { track: "Mr. Brightside", artist: "The Killers", decade: "2000s" },
+      { track: "Rolling in the Deep", artist: "Adele", decade: "2010s" },
+      { track: "Blinding Lights", artist: "The Weeknd", decade: "2020s" },
+      { track: "Eye of the Tiger", artist: "Survivor", decade: "1980s" },
+      { track: "Come Together", artist: "The Beatles", decade: "1960s" },
+      { track: "Purple Rain", artist: "Prince", decade: "1980s" },
+      { track: "Shape of You", artist: "Ed Sheeran", decade: "2010s" },
+      { track: "Lose Yourself", artist: "Eminem", decade: "2000s" },
+      { track: "Billie Jean", artist: "Michael Jackson", decade: "1980s" },
+      { track: "Like a Rolling Stone", artist: "Bob Dylan", decade: "1960s" },
+      { track: "Good Vibrations", artist: "The Beach Boys", decade: "1960s" },
+    ];
+
+    const decades = ["1960s", "1970s", "1980s", "1990s", "2000s", "2010s", "2020s"];
+
+    let queue = [];
+    let currentIndex = 0;
+    let correct = 0;
+    const TOTAL = 10;
+
+    function shuffle(arr) {
+      return [...arr].sort(() => Math.random() - 0.5);
+    }
+
+    function startGame() {
+      queue = shuffle(songs).slice(0, TOTAL);
+      currentIndex = 0;
+      correct = 0;
+      document.getElementById('score-correct').textContent = 0;
+      document.getElementById('score-total').textContent = TOTAL;
+      document.getElementById('game-over').style.display = 'none';
+      document.getElementById('game-area').style.display = 'block';
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const song = queue[currentIndex];
+      document.getElementById('track-name').textContent = song.track;
+      document.getElementById('artist-name').textContent = song.artist;
+      document.getElementById('score-q').textContent = currentIndex + 1;
+      document.getElementById('feedback').textContent = '';
+      document.getElementById('feedback').className = '';
+      document.getElementById('next-btn').style.display = 'none';
+
+      // Build wrong options (3 wrong + 1 correct, shuffled)
+      const wrong = shuffle(decades.filter(d => d !== song.decade)).slice(0, 3);
+      const options = shuffle([song.decade, ...wrong]);
+
+      const container = document.getElementById('decade-buttons');
+      container.innerHTML = '';
+      options.forEach(decade => {
+        const btn = document.createElement('button');
+        btn.className = 'decade-btn';
+        btn.textContent = decade;
+        btn.onclick = () => handleAnswer(btn, decade, song.decade);
+        container.appendChild(btn);
+      });
+    }
+
+    function handleAnswer(btn, chosen, correct_decade) {
+      // Disable all buttons
+      document.querySelectorAll('.decade-btn').forEach(b => b.disabled = true);
+
+      const fb = document.getElementById('feedback');
+      if (chosen === correct_decade) {
+        btn.classList.add('correct');
+        fb.textContent = '✓ Correct!';
+        fb.className = 'correct';
+        correct++;
+        document.getElementById('score-correct').textContent = correct;
+      } else {
+        btn.classList.add('wrong');
+        fb.textContent = `✗ It was the ${correct_decade}`;
+        fb.className = 'wrong';
+        // Highlight the correct one
+        document.querySelectorAll('.decade-btn').forEach(b => {
+          if (b.textContent === correct_decade) b.classList.add('correct');
+        });
+      }
+
+      document.getElementById('next-btn').style.display = 'block';
+    }
+
+    function nextQuestion() {
+      currentIndex++;
+      if (currentIndex >= TOTAL) {
+        endGame();
+      } else {
+        loadQuestion();
+      }
+    }
+
+    function endGame() {
+      document.getElementById('game-area').style.display = 'none';
+      const go = document.getElementById('game-over');
+      go.style.display = 'block';
+      document.getElementById('final-score').textContent = `${correct} / ${TOTAL}`;
+      const pct = correct / TOTAL;
+      let msg = pct >= 0.9 ? "🎸 Music genius! Incredible score." :
+                pct >= 0.7 ? "🎵 Great job — solid music knowledge!" :
+                pct >= 0.5 ? "🎶 Not bad — keep listening!" :
+                "📻 Time to expand the playlist!";
+      document.getElementById('grade-msg').textContent = msg;
+    }
+
+    startGame();
+  </script>
+
+</body>
+</html>

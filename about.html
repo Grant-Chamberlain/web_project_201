@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About – Grant Chamberlain</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="main.css" />
+  <style>
+    .page-hero {
+      background: linear-gradient(135deg, var(--navy), #1a3a2e);
+      color: #fff;
+      padding: 3.5rem 0 2.5rem;
+    }
+    .page-hero h1 { font-family: 'Playfair Display', serif; }
+    .page-hero p { color: rgba(255,255,255,0.65); }
+
+    .timeline {
+      border-left: 3px solid var(--accent);
+      padding-left: 1.5rem;
+      margin-left: 0.5rem;
+    }
+    .timeline-item { position: relative; margin-bottom: 1.75rem; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.85rem;
+      top: 0.4rem;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+    .timeline-item h5 { font-weight: 600; margin-bottom: 0.15rem; }
+    .timeline-item .year { font-size: 0.85rem; color: var(--muted); }
+
+    .interest-badge {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Grant Chamberlain</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto gap-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+          <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="scratch.html">Favorites</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <h1>About Me</h1>
+      <p class="mb-0">A little about who I am and where I've been.</p>
+    </div>
+  </div>
+
+  <main class="container py-5">
+    <div class="row g-5">
+
+      <div class="col-lg-7">
+        <h2 class="section-title">My Story</h2>
+        <div class="section-rule"></div>
+        <p>I'm Grant Chamberlain, a Computer Science student at Brigham Young University originally from Las Vegas, Nevada. Growing up I was passionate about music — I've played piano for over 11 years and string bass for 7, even earning a spot in the Clark County School District Honor Orchestra.</p>
+        <p>From 2022 to 2024 I served as a full-time missionary in McAllen, Texas, where I became proficient in Spanish and had the chance to serve a vibrant community. That experience deepened my work ethic and love for connecting with people from different backgrounds.</p>
+        <p>I'm now back at BYU pursuing software engineering, and I'm excited about where technology and service can intersect.</p>
+
+        <h2 class="section-title mt-5">Timeline</h2>
+        <div class="section-rule"></div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <h5>Eagle Scout</h5>
+            <span class="year">2018</span>
+            <p class="mb-0 text-muted small">Achieved the rank of Eagle Scout with Boy Scouts of America.</p>
+          </div>
+          <div class="timeline-item">
+            <h5>Graduated Centennial High School</h5>
+            <span class="year">2022</span>
+            <p class="mb-0 text-muted small">Ranked 3rd out of 609 graduates. NHS Vice-President, volleyball captain.</p>
+          </div>
+          <div class="timeline-item">
+            <h5>Full-Time Missionary</h5>
+            <span class="year">2022–2024</span>
+            <p class="mb-0 text-muted small">Served Spanish-speaking mission in McAllen, TX for The Church of Jesus Christ of Latter-Day Saints.</p>
+          </div>
+          <div class="timeline-item">
+            <h5>BYU Computer Science</h5>
+            <span class="year">2024–Present</span>
+            <p class="mb-0 text-muted small">Currently pursuing a B.S. in Computer Science at Brigham Young University.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <h2 class="section-title">Interests</h2>
+        <div class="section-rule"></div>
+        <div class="d-flex flex-wrap gap-2 mb-5">
+          <span class="interest-badge">🎹 Piano</span>
+          <span class="interest-badge">🎻 String Bass</span>
+          <span class="interest-badge">⛷️ Skiing</span>
+          <span class="interest-badge">✈️ Travel</span>
+          <span class="interest-badge">🖨️ 3-D Printing</span>
+          <span class="interest-badge">🕺 Ballroom Dancing</span>
+          <span class="interest-badge">🥏 Disc Golf</span>
+          <span class="interest-badge">🎮 Gaming</span>
+          <span class="interest-badge">📚 Reading</span>
+        </div>
+
+        <h2 class="section-title">Languages</h2>
+        <div class="section-rule"></div>
+        <div class="mb-4">
+          <div class="d-flex justify-content-between mb-1">
+            <span class="fw-600">English</span><span class="text-muted small">Native</span>
+          </div>
+          <div class="progress" style="height:8px;">
+            <div class="progress-bar" style="width:100%; background:var(--accent);"></div>
+          </div>
+        </div>
+        <div>
+          <div class="d-flex justify-content-between mb-1">
+            <span class="fw-600">Spanish</span><span class="text-muted small">Proficient</span>
+          </div>
+          <div class="progress" style="height:8px;">
+            <div class="progress-bar" style="width:75%; background:var(--accent);"></div>
+          </div>
+        </div>
+
+        <div class="info-card mt-5">
+          <div class="icon">📬</div>
+          <h3>Get in Touch</h3>
+          <p class="text-muted mb-2">Feel free to reach out for opportunities, questions, or just to connect.</p>
+          <a href="mailto:chamberlaingcx@gmail.com" style="color:var(--accent); font-weight:600;">chamberlaingcx@gmail.com</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p class="mb-0">Grant Thomas Chamberlain &nbsp;·&nbsp; <a href="mailto:chamberlaingcx@gmail.com">chamberlaingcx@gmail.com</a></p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

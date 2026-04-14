@@ -1,0 +1,276 @@
+/* ── Google Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Circular+Std:wght@400;700&family=Bebas+Neue&family=DM+Sans:wght@300;400;600&display=swap');
+
+/* ── CSS Variables ── */
+:root {
+  --sp-black: #121212;
+  --sp-dark: #181818;
+  --sp-card: #282828;
+  --sp-green: #1db954;
+  --sp-green-light: #1ed760;
+  --sp-white: #ffffff;
+  --sp-muted: #b3b3b3;
+  --sp-text: #e0e0e0;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+/* ── Reset & Base ── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--sp-black);
+  color: var(--sp-text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* ── Nav ── */
+#sp-nav {
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(12px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0.9rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+#sp-nav .logo {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  color: var(--sp-green);
+  letter-spacing: 2px;
+  text-decoration: none;
+}
+
+#sp-nav a {
+  color: var(--sp-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+#sp-nav a:hover { color: var(--sp-white); }
+
+#sp-nav .nav-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* ── Hero Section ── */
+#hero {
+  background: linear-gradient(180deg, #1a3a2e 0%, var(--sp-black) 100%);
+  padding: 4rem 2rem 3rem;
+  text-align: center;
+}
+
+#hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  color: var(--sp-white);
+  letter-spacing: 4px;
+  line-height: 1;
+}
+
+#hero .subtitle {
+  color: var(--sp-muted);
+  font-size: 1.1rem;
+  margin-top: 0.75rem;
+}
+
+#hero .green-tag {
+  display: inline-block;
+  background: var(--sp-green);
+  color: #000;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+
+/* ── Section Wrapper ── */
+.sp-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+
+/* ── Section Heading ── */
+.sp-heading {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--sp-white);
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.sp-rule {
+  width: 40px;
+  height: 3px;
+  background: var(--sp-green);
+  border-radius: 2px;
+  margin-bottom: 2rem;
+}
+
+/* ── Song Grid ── */
+#songs {
+  background: var(--sp-dark);
+}
+
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.song-card {
+  background: var(--sp-card);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.song-card:hover {
+  background: #3e3e3e;
+  transform: translateY(-4px);
+}
+
+.song-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.song-info {
+  padding: 0.85rem 1rem 1rem;
+}
+
+.song-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--sp-white);
+  margin-bottom: 0.2rem;
+}
+
+.song-artist {
+  font-size: 0.85rem;
+  color: var(--sp-muted);
+}
+
+/* ── About this Playlist (ordered/unordered list demo) ── */
+#about-list {
+  background: var(--sp-black);
+}
+
+.playlist-meta {
+  background: var(--sp-card);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.playlist-meta ol {
+  padding-left: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.playlist-meta ol li {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: var(--sp-text);
+}
+
+.playlist-meta ul {
+  list-style: disc;
+  padding-left: 1.6rem;
+  margin-top: 0.4rem;
+}
+
+.playlist-meta ul li {
+  color: var(--sp-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+/* ── YouTube Section ── */
+#video {
+  background: var(--sp-dark);
+}
+
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.video-wrapper iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+/* ── Tableau Section ── */
+#tableau {
+  background: var(--sp-black);
+}
+
+/* ── Anchors / Navigation ── */
+#back-top {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--sp-green);
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+
+#back-top:hover { color: var(--sp-green-light); }
+
+/* ── Custom background divider ── */
+.green-stripe {
+  background: linear-gradient(90deg, var(--sp-green) 0%, #13843b 100%);
+  height: 4px;
+  width: 100%;
+}
+
+/* ── Footer ── */
+#sp-footer {
+  background: #000;
+  text-align: center;
+  padding: 2rem;
+  color: var(--sp-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+#sp-footer a {
+  color: var(--sp-green);
+  text-decoration: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .song-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .song-grid { grid-template-columns: 1fr; }
+  #sp-nav .nav-links { gap: 0.75rem; }
+}
