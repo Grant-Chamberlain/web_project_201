@@ -15,6 +15,10 @@ body {
   min-height: 100%;
 }
 
+html {
+  background-color: var(--navy);
+}
+
 body {
   margin: 0;
   font-family: 'Source Sans 3', sans-serif;
@@ -23,6 +27,10 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+body > main {
+  flex: 1 0 auto;
 }
 
 /* ── Navbar ── */
@@ -153,6 +161,7 @@ footer {
   padding: 1.5rem 0;
   text-align: center;
   margin-top: auto;
+  flex-shrink: 0;
 }
 
 footer a {
